@@ -3,13 +3,12 @@ def contact(contact_1, phone, name, address):
     return contact_1
 
 def menu():
-    print("""
-   [1] Додати контакт
-   [2] Видалити контакт
-   [3] Переглянути всі контакти
-   [4] Редагувати контакт
-   [5] Пошук контакта
-   [6] Вийти""")
+    print("""[1] Додати контакт
+[2] Видалити контакт
+[3] Переглянути всі контакти
+[4] Редагувати контакт
+[5] Пошук контакта
+[6] Вийти""")
 
 def contact_all(contact_list):
     contact_3 = input("введіть номер телефону, ім'я та адрес щоб добавити контакт в список: ")
@@ -32,18 +31,25 @@ def new_contact(contact_1):
         contact_1[phone]["address"] = new_address
 
 def search_contact(contact_1):
-    sch = input("введіть контакт який ви хочете знайти: ")
-    sch = sch.lower()
-    if sch in contact_1:
-        print(f'phone: {sch} name: {contact_1[sch]["name"]}, address: {contact_1[sch]["address"]}')
+    sch = input("введіть контакт який ви хочете знайти: ").lower()
+    return[
+    contacts for contacts in contact_1 if sch in contacts["name"].lower() or sch in contacts["phone"].lower()
+    ]
+    #if sch in contact_1:
+    #    print(f'phone: {contact_1[sch]["phone"]} name: {contact_1[sch]["name"]}, address: {contact_1[sch]["address"]}')
+
+# def filter_contact(contact_1):
+#     search_contact(contact_1)
+#     return list(filter(lambda contact_1.lower() in contact["name"] for contact in contact_1 ))
 
 
 def final():
-    contact_1 = {
-    "789": {"name": "Іван Іваненко", "address": "Київ"},
-    "321": {"name": "Петро Петрович", "address": "Львів"},
-    "555": {"name": "Анна Антонівна", "address": "Одеса"}
-}
+    contact_1 = [
+    {"phone": "789", "name": "Іван Іваненко", "address": "Київ"},
+    {"phone": "780", "name": "Іван Петрович", "address": "франік"},
+    {"phone": "321", "name": "Петро Петрович", "address": "Львів"},
+    {"phone": "555", "name": "Анна Антонівна", "address": "Одеса"}
+    ]
 
 
     while True:
@@ -60,8 +66,8 @@ def final():
 
         elif namb == "3":
             if contact_1:
-                for phone, info in contact_1.items():
-                    print(f'phone: {phone} name: {info["name"]}, address: {info["address"]}')
+                for contacts in contact_1:
+                    print(f"phone: {contacts["phone"]}, name: {contacts["name"]}, address: {contacts["address"]}")
             else:
                 print("немає контактів")
 
