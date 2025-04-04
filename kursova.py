@@ -1,3 +1,6 @@
+from natsort import natsorted
+
+
 class Contact():
     def __init__(self, phone, name, address):
         self.phone = phone
@@ -5,8 +8,9 @@ class Contact():
         self.address = address
 
     def contact_add(self, contact_list):
-        contact_3 = input("введіть номер телефону, ім'я та адрес щоб добавити контакт в список: ")
-        phone, name, address = contact_3.split(", ")
+        phone = input("введіть номер телефону: ")
+        name = input("введіть ім'я: ")
+        address = input("введіть адрес: ")
         contact_list[phone] = {"name": name, "address": address}
         print("контакт додано")
 
@@ -14,6 +18,9 @@ class Contact():
         nan = input("введіть контакт який хочете видалити: ")
         if nan in contact_1:
             del contact_1[nan]
+            print("контакт видалено")
+        else:
+            print("такого контакту немає виберіть існуючий")
         return
 
     def print_contact(self, contact_1):
@@ -48,24 +55,22 @@ class Contact():
                 print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}")
         else:
             print("none contact")
-        # print("-" * 60)
-        # def stc(item):
-        #     return item[1]["name"]
-        # sorted_contacts = sorted(contact_1.items(), key=stc)
-        # for phone, info in sorted_contacts:
-        #     print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}")
-
+        print("-" * 60)
+        sorted_by_name = dict(natsorted(self.contact_1.items(), key=lambda x: x[1]["name"]))
+        if sorted_by_name:
+            for phone, info in sorted_by_name.items():
+                print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}")
+        else:
+            print("none contact")
 
 class Final(Contact):
     def __init__(self):
         self.contact_1 = {
-            "789": {"name": "Іван Іваненко", "address": "Київ"},
-            "780": {"name": "Іван Петрович", "address": "франік"},
-            "321": {"name": "Петро Петрович", "address": "Львів"},
-            "555": {"name": "Анна Антонівна", "address": "Одеса"}
+            "789": {"name": "Ivan Ivanenko", "address": "Kyev"},
+            "780": {"name": "Ivan Petrovych", "address": "Franic"},
+            "321": {"name": "Petro Petrovych", "address": "Lviv"},
+            "555": {"name": "Anna Antonyvna", "address": "Odesa"}
         }
-
-
 
     def menu(self):
         while True:
@@ -83,7 +88,6 @@ class Final(Contact):
 
             elif namb == "2":
                 self.delete_contact(self.contact_1)
-                print("контакт видалено")
 
             elif namb == "3":
                 self.print_contact(self.contact_1)
