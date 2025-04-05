@@ -17,7 +17,6 @@ class Contact():
             print("контакт додано")
         data_add[phone] = data
 
-
     def delete_contact(self, contact_1):
         nan = input("введіть контакт який хочете видалити: ")
         if nan in contact_1:
@@ -52,21 +51,23 @@ class Contact():
         else:
             print("none contact")
 
-    def sort_contact(self, contact_1, add_data):
-        sorted_contacts = {kay: contact_1[kay] for kay in sorted(contact_1.keys())}
-        if sorted_contacts:
-            for phone, info in sorted_contacts.items():
+    def sorted_1(self, contact_1, add_data):
+        sorted_by_phone = {kay: contact_1[kay] for kay in sorted(contact_1.keys())}
+        if sorted_by_phone:
+            for phone, info in sorted_by_phone.items():
                 print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
         else:
             print("none contact")
-        print("-" * 60)
+
+    def sorted_2(self, contact_1, add_data):
         sorted_by_name = dict(sorted(self.contact_1.items(), key=lambda x: x[1]["name"]))
         if sorted_by_name:
             for phone, info in sorted_by_name.items():
                 print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
         else:
             print("none contact")
-        print("-" * 60)
+
+    def sorted_3(self, contact_1, add_data):
         sorted_by_date = {phone: contact_1[phone] for phone in sorted(contact_1, key=lambda x: self.add_date[x])}
         if sorted_by_date:
             for phone, info in sorted_by_date.items():
@@ -98,6 +99,9 @@ class Final(Contact):
 [5] Пошук контакта
 [6] Відсортувати контакти
 [7] Вийти""")
+            dia = ("""[1] Сортувати за номером телефону
+[2] Сортувати за імям
+[3] Сортувати за датою створення""")
             namb = input("Виберіть дію: ")
 
             if namb == "1":
@@ -116,7 +120,17 @@ class Final(Contact):
                 self.search_contact(self.contact_1, self.add_date)
 
             elif namb == "6":
-                self.sort_contact(self.contact_1, self.add_date)
+                print(dia)
+                nams = input("Виберіть дію: ")
+                if nams == "1":
+                    self.sorted_1(self.contact_1, self.add_date)
+                elif nams == "2":
+                    self.sorted_2(self.contact_1, self.add_date)
+                elif nams == "3":
+                    self.sorted_3(self.contact_1, self.add_date)
+                else:
+                    print("такої дії не існує")
+
 
             elif namb == "7":
                 print("програма завершина")
