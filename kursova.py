@@ -7,6 +7,9 @@ class Contact():
 
     def contact_add(self, contact_list, data_add):
         phone = input("введіть номер телефону: ")
+        if phone in contact_list:
+            print("Цей номер вже є в телефонні книзі")
+            return
         name = input("введіть ім'я: ")
         address = input("введіть адрес: ")
         data = input("введіть датe в форматі(РРРР-ММ-ДД): ")
