@@ -1,96 +1,90 @@
 class Contact():
-    def __init__(self, phone, name, address, data):
+    def __init__(self, phone, name, address, data, contact_1, add_date):
+        self.add_date = add_date
+        self.contact_1 = contact_1
         self.phone = phone
         self.name = name
         self.address = address
         self.data = data
 
     def contact_add(self, contact_list, data_add):
-        phone = input("введіть номер телефону: ")
+        phone = input("Введіть номер телефону: ")
         if phone in contact_list:
             print("Цей номер вже є в телефонні книзі")
             return
-        name = input("введіть ім'я: ")
-        address = input("введіть адрес: ")
-        data = input("введіть датe в форматі(РРРР-ММ-ДД): ")
-        if phone is str:
-            print("номер має бути цифрами")
-        else:
-            contact_list[phone] = {"name": name, "address": address}
-            print("контакт додано")
+        if not phone.isdigit(): # isdigit це короче якщо хоча б один символ не є цифрою буде False
+            print("Номер має бути цифрами")
+            return
+        name = input("Введіть ім'я: ")
+        address = input("Введіть адрес: ")
+        data = input("Введіть дату в форматі(РРРР-ММ-ДД): ")
+        contact_list[phone] = {"name": name, "address": address}
+        print("Контакт додано")
         data_add[phone] = data
 
     def delete_contact(self, contact_1):
-        nan = input("введіть контакт який хочете видалити: ")
+        nan = input("Введіть контакт який хочете видалити: ")
         if nan in contact_1:
             del contact_1[nan]
-            print("контакт видалено")
+            print("Контакт видалено")
         else:
-            print("такого контакту немає виберіть існуючий")
+            print("Такого контакту немає виберіть існуючий")
         return
 
     def print_contact(self, contact_1, add_data):
-        if contact_1:
-            for contacts_1, contacts in contact_1.items() or add_data.items():
-                print(f"phone: {contacts_1}, name: {contacts["name"]}, address: {contacts["address"]}, data: {add_data[contacts_1]}")
-        else:
-            print("немає контактів")
+        for contacts_1, contacts in contact_1.items() or add_data.items():
+            print(f"phone: {contacts_1}, name: {contacts["name"]}, address: {contacts["address"]}, data: {add_data[contacts_1]}")
+
 
     def contact_edit(self, contact_1):
-        phone = input("введіть номер який хочере редагувати: ")
+        phone = input("Введіть номер який хочере редагувати: ")
         if phone in contact_1:
-            new_name = input("введіть нове ім'я: ")
-            new_address = input("введіть новий адрес: ")
+            new_name = input("Введіть нове ім'я: ")
+            new_address = input("Введіть новий адрес: ")
             contact_1[phone]["name"] = new_name
             contact_1[phone]["address"] = new_address
 
     def search_contact(self, contact_1, add_data):
-        sch = input("введіть контакт який ви хочете знайти: ").lower()
+        sch = input("Введіть контакт який ви хочете знайти: ").lower()
         res = {phone: info for phone, info in contact_1.items()
                if sch in phone or sch in info["name"].lower()}
-        if res:
-            for phone, info in res.items():
-                print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
-        else:
-            print("none contact")
+        for phone, info in res.items():
+            print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
+
 
     def sorted_1(self, contact_1, add_data):
         sorted_by_phone = {kay: contact_1[kay] for kay in sorted(contact_1.keys())}
-        if sorted_by_phone:
-            for phone, info in sorted_by_phone.items():
-                print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
-        else:
-            print("none contact")
+        for phone, info in sorted_by_phone.items():
+            print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
 
-    def sorted_2(self, contact_1, add_data):
+
+    def sorted_2(self, add_data):
         sorted_by_name = dict(sorted(self.contact_1.items(), key=lambda x: x[1]["name"]))
-        if sorted_by_name:
-            for phone, info in sorted_by_name.items():
-                print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
-        else:
-            print("none contact")
 
-    def sorted_3(self, contact_1, add_data):
+        for phone, info in sorted_by_name.items():
+            print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
+
+
+    def sorted_3(self, contact_1,):
         sorted_by_date = {phone: contact_1[phone] for phone in sorted(contact_1, key=lambda x: self.add_date[x])}
-        if sorted_by_date:
-            for phone, info in sorted_by_date.items():
-                print(f"phone: {phone}, name: {info['name']}, address: {info['address']}, date: {self.add_date[phone]}")
-        else:
-            print("Немає контактів.")
+
+        for phone, info in sorted_by_date.items():
+            print(f"phone: {phone}, name: {info['name']}, address: {info['address']}, date: {self.add_date[phone]}")
+
 
 class Final(Contact):
     def __init__(self):
         self.contact_1 = {
-            "789": {"name": "Ivan Ivanenko", "address": "Kyev"},
-            "780": {"name": "Ivan Petrovych", "address": "Franic"},
-            "321": {"name": "Petro Petrovych", "address": "Lviv"},
-            "555": {"name": "Anna Antonyvna", "address": "Odesa"}
+            "380123456789": {"name": "Ivan Ivanenko", "address": "Kyev"},
+            "380923456780": {"name": "Ivan Petrovych", "address": "Franic"},
+            "380987654321": {"name": "Petro Petrovych", "address": "Lviv"},
+            "380555555555": {"name": "Anna Antonyvna", "address": "Odesa"}
         }
         self.add_date = {
-            "789": "2025-04-01",
-            "780": "2025-04-02",
-            "321": "2025-03-30",
-            "555": "2025-03-29"
+            "380123456789": "2025-04-01",
+            "380923456780": "2025-04-02",
+            "380987654321": "2025-03-30",
+            "380555555555": "2025-03-29"
         }
 
     def menu(self):
