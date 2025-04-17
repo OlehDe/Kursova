@@ -32,7 +32,7 @@ class Contact():
         return
 
     def print_contact(self, contact_1, add_data):
-        for contacts_1, contacts in contact_1.items() or add_data.items():
+        for contacts_1, contacts in contact_1.items():
             print(f"phone: {contacts_1}, name: {contacts["name"]}, address: {contacts["address"]}, data: {add_data[contacts_1]}")
 
 
