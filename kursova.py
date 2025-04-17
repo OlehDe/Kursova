@@ -12,7 +12,7 @@ class Contact():
         if phone in contact_list:
             print("Цей номер вже є в телефонні книзі")
             return
-        if not phone.isdigit(): # isdigit це короче якщо хоча б один символ не є цифрою буде False
+        if not phone.isdigit(): # isdigit це короче якщо хоча б один символ не є цифрою буде False, а якщо всі цифри, то буде True
             print("Номер має бути цифрами")
             return
         name = input("Введіть ім'я: ")
@@ -23,7 +23,7 @@ class Contact():
         data_add[phone] = data
 
     def delete_contact(self, contact_1):
-        nan = input("Введіть контакт який хочете видалити: ")
+        nan = input("Введіть номер контакту який хочете видалити: ")
         if nan in contact_1:
             del contact_1[nan]
             print("Контакт видалено")
@@ -37,7 +37,7 @@ class Contact():
 
 
     def contact_edit(self, contact_1):
-        phone = input("Введіть номер який хочере редагувати: ")
+        phone = input("Введіть номер контакту який хочете редагувати: ")
         if phone in contact_1:
             new_name = input("Введіть нове ім'я: ")
             new_address = input("Введіть новий адрес: ")
@@ -45,7 +45,7 @@ class Contact():
             contact_1[phone]["address"] = new_address
 
     def search_contact(self, contact_1, add_data):
-        sch = input("Введіть контакт який ви хочете знайти: ").lower()
+        sch = input("Введіть (номер або назву) контакту який ви хочете знайти: ").lower()
         res = {phone: info for phone, info in contact_1.items()
                if sch in phone or sch in info["name"].lower()}
         for phone, info in res.items():
