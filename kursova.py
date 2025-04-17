@@ -35,7 +35,6 @@ class Contact():
         for contacts_1, contacts in contact_1.items():
             print(f"phone: {contacts_1}, name: {contacts["name"]}, address: {contacts["address"]}, data: {add_data[contacts_1]}")
 
-
     def contact_edit(self, contact_1):
         phone = input("Введіть номер контакту який хочете редагувати: ")
         if phone in contact_1:
@@ -43,6 +42,8 @@ class Contact():
             new_address = input("Введіть новий адрес: ")
             contact_1[phone]["name"] = new_name
             contact_1[phone]["address"] = new_address
+        else:
+            print("Такого контакту немає виберіть існуючий")
 
     def search_contact(self, contact_1, add_data):
         sch = input("Введіть (номер або назву) контакту який ви хочете знайти: ").lower()
