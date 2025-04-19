@@ -34,6 +34,7 @@ class Contact():
     def print_contact(self, contact_1, add_data):
         for contacts_1, contacts in contact_1.items():
             print(f"phone: {contacts_1}, name: {contacts["name"]}, address: {contacts["address"]}, data: {add_data[contacts_1]}")
+        return
 
     def contact_edit(self, contact_1):
         phone = input("Введіть номер контакту який хочете редагувати: ")
@@ -59,14 +60,14 @@ class Contact():
             print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
 
 
-    def sorted_2(self, add_data):
+    def sorted_2(self, contact_1, add_data):
         sorted_by_name = dict(sorted(self.contact_1.items(), key=lambda x: x[1]["name"]))
 
         for phone, info in sorted_by_name.items():
             print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
 
 
-    def sorted_3(self, contact_1,):
+    def sorted_3(self,contact_1, add_data):
         sorted_by_date = {phone: contact_1[phone] for phone in sorted(contact_1, key=lambda x: self.add_date[x])}
 
         for phone, info in sorted_by_date.items():
