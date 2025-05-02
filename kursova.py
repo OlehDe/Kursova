@@ -60,14 +60,14 @@ class Contact():
             print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
 
 
-    def sorted_2(self, contact_1, add_data):
+    def sorted_2(self, add_data):
         sorted_by_name = dict(sorted(self.contact_1.items(), key=lambda x: x[1]["name"]))
 
         for phone, info in sorted_by_name.items():
             print(f"phone: {phone}, name: {info["name"]}, address: {info["address"]}, data: {add_data[phone]}")
 
 
-    def sorted_3(self,contact_1, add_data):
+    def sorted_3(self,contact_1):
         sorted_by_date = {phone: contact_1[phone] for phone in sorted(contact_1, key=lambda x: self.add_date[x])}
 
         for phone, info in sorted_by_date.items():
@@ -124,9 +124,9 @@ class Final(Contact):
                 if nams == "1":
                     self.sorted_1(self.contact_1, self.add_date)
                 elif nams == "2":
-                    self.sorted_2(self.contact_1, self.add_date)
+                    self.sorted_2(self.add_date)
                 elif nams == "3":
-                    self.sorted_3(self.contact_1, self.add_date)
+                    self.sorted_3(self.contact_1)
                 else:
                     print("такої дії не існує")
 
